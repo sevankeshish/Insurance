@@ -1,5 +1,6 @@
 //variables
 const form = document.querySelector("#request-quote")
+const html = new HTMLUI()
 
 
 //eventListeners
@@ -10,7 +11,6 @@ function eventListeners() {
     document.addEventListener("DOMContentLoaded", function () {
 
         //display the <option>
-        const html = new HTMLUI()
         // console.log(html)
         html.displayYears()
 
@@ -25,6 +25,12 @@ function eventListeners() {
         // console.log(make);
         // console.log(year);
         // console.log(level);
+
+        if(make === "" || year === "" || level === ""){
+            html.displayError("لظفا مقادیر را به درستی وارد کنید")
+        } else {
+            console.log("alright");
+        }
 
     })
 
@@ -72,4 +78,16 @@ HTMLUI.prototype.displayYears = function () {
         selectYear.appendChild(option)
 
     }
+}
+
+HTMLUI.prototype.displayError = function (err){
+    const div = document.createElement("div")
+    div.classList ="error"
+    div.innerText = err
+
+    form.insertBefore(div , document.querySelector(".form-group"))
+
+    setTimeout(() => {
+        document.querySelector(".error").remove()
+    }, 3000);
 }
