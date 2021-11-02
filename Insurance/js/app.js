@@ -30,13 +30,13 @@ function eventListeners() {
             const insurance = new Insurance(make, year, level)
             // insurance(make, year, level) //it is a wrong one
             const price = insurance.calculatePrice(insurance)
+            // console.log(price);
+            html.showResult(price, insurance)
         }
 
     })
 
 }
-
-
 
 
 //objects
@@ -83,7 +83,12 @@ Insurance.prototype.calculatePrice = function (info) {
     // console.log(difference);
     // price = price - (((difference * 3) /100) * price)
     price = price - ((difference * 0.03) * price)
-    console.log(price);
+    // console.log(price);
+
+    const level = info.level
+    // console.log(level);
+    price = this.calculateLevel(level, price)
+    // console.log(price);
 }
 
 Insurance.prototype.getDifferenceYear = function (year) {
@@ -110,7 +115,21 @@ Insurance.prototype.getDifferenceYear = function (year) {
     year = max - year
 
     return year
+}
 
+Insurance.prototype.calculateLevel = function (level, price) {
+
+    /* 
+    basic ==> increse 30%
+    complete ==> increase 50%
+    */
+    if (level === "basic") {
+        price = price * 1.3
+    } else {
+        price = price * 1.5
+    }
+
+    return price
 }
 
 function HTMLUI() {}
@@ -161,4 +180,14 @@ HTMLUI.prototype.displayError = function (err) {
     setTimeout(() => {
         document.querySelector(".error").remove()
     }, 3000);
+}
+
+HTMLUI.prototype.showResult = function (price, info) {
+    const result = document.querySelector("#result")
+    const div = document.createElement('div')
+    div.innerHTML = `
+    <p class = "total" >فیمت نهایی :${price}</p>
+    `
+    console.log(info);
+    result.appendChild(div)
 }
