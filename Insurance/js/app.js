@@ -39,7 +39,7 @@ function eventListeners() {
 
 }
 
-
+/*
 //objects
 function Insurance(make, year, level) {
     this.make = make
@@ -53,11 +53,11 @@ Insurance.prototype.calculatePrice = function (info) {
     let base = 2000000;
     let make = info.make
     // insurance calculation by make
-    /*
-    make 1 ==> pride ==> 1.15
-    make 2 ==> optima ==> 1.30
-    make 3 ==> porschr ==> 1.80
-    */
+            
+           // make 1 ==> pride ==> 1.15
+           // make 2 ==> optima ==> 1.30
+           // make 3 ==> porschr ==> 1.80
+            
 
     switch (make) {
         case "1":
@@ -118,10 +118,10 @@ Insurance.prototype.getDifferenceYear = function (year) {
 }
 
 Insurance.prototype.calculateLevel = function (level, price) {
-    /* 
-       basic ==> increse 30%
-       complete ==> increase 50%
-       */
+     
+      // basic ==> increse 30%
+       //complete ==> increase 50%
+       
     if (level === "basic") {
         price = price * 1.3
     } else {
@@ -229,3 +229,5 @@ HTMLUI.prototype.showResult = function (price, info) {
 
     // console.log(info);
 }
+
+*/
