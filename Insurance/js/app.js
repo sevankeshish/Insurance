@@ -26,6 +26,10 @@ function eventListeners() {
         if (make === "" || year === "" || level === "") {
             html.displayError("لظفا مقادیر را به درستی وارد کنید")
         } else {
+            let resultDiv = document.querySelector("#result div")
+            if (resultDiv !== null){
+                resultDiv.remove()
+            }
             // console.log("alright");
             const insurance = new Insurance(make, year, level)
             // insurance(make, year, level) //it is a wrong one

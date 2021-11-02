@@ -6,7 +6,6 @@ class Insurance {
         this.level = level
     }
 
-
     calculatePrice(info) {
         // console.log(info);
         let price;
