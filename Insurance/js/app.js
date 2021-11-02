@@ -32,6 +32,7 @@ function eventListeners() {
             const price = insurance.calculatePrice(insurance)
             // console.log(price);
             html.showResult(price, insurance)
+
         }
 
     })
@@ -69,7 +70,7 @@ Insurance.prototype.calculatePrice = function (info) {
             price = base * 1.80
             break;
 
-        default:
+            // default:
             break;
     }
     // console.log(price);
@@ -86,7 +87,6 @@ Insurance.prototype.calculatePrice = function (info) {
     // console.log(price);
 
     const level = info.level
-    // console.log(level);
     price = this.calculateLevel(level, price)
     // console.log(price);
 }
@@ -107,9 +107,9 @@ Insurance.prototype.getDifferenceYear = function (year) {
     const now = new Date().toLocaleDateString('fa-IR');
     // console.log(now);
 
-    const newYear = now.slice(0, 4)
+    let newYear = now.slice(0, 4)
     // console.log(newYear)
-    const max = fixNumbers(newYear)
+    let max = fixNumbers(newYear)
     // console.log(max);
 
     year = max - year
@@ -118,11 +118,10 @@ Insurance.prototype.getDifferenceYear = function (year) {
 }
 
 Insurance.prototype.calculateLevel = function (level, price) {
-
     /* 
-    basic ==> increse 30%
-    complete ==> increase 50%
-    */
+       basic ==> increse 30%
+       complete ==> increase 50%
+       */
     if (level === "basic") {
         price = price * 1.3
     } else {
@@ -150,12 +149,12 @@ HTMLUI.prototype.displayYears = function () {
     const now = new Date().toLocaleDateString('fa-IR');
     // console.log(now);
 
-    const newYear = now.slice(0, 4)
+    let newYear = now.slice(0, 4)
     // console.log(newYear)
-    const max = fixNumbers(newYear)
+    let max = fixNumbers(newYear)
     // console.log(max);
 
-    const min = max - 20
+    let min = max - 20
 
     const selectYear = document.querySelector("#year")
 
@@ -183,11 +182,50 @@ HTMLUI.prototype.displayError = function (err) {
 }
 
 HTMLUI.prototype.showResult = function (price, info) {
+
     const result = document.querySelector("#result")
-    const div = document.createElement('div')
+    const div = document.createElement("div")
+
+    let make = info.make
+    switch (make) {
+        case "1":
+            make = "پراید"
+            break;
+        case "2":
+            make = "اپتیما"
+            break;
+        case "3":
+            make = "پورشه"
+            break;
+
+            // default:
+            break;
+    }
+
+    let level = info.level
+
+    if (level === "basic") {
+        level = "ساده"
+    } else {
+        level = "کامل"
+    }
+
+
     div.innerHTML = `
+    <p class="header">خلاصه فاکتور</p>
+    <p>مدل ماشین :${make}</p>
+    <p>سال ساخت :${info.year}</p>
+    <p>نوع بیمه :${level}</p>
     <p class = "total" >فیمت نهایی :${price}</p>
     `
-    console.log(info);
-    result.appendChild(div)
+    //show spinner
+    const spinner = document.querySelector("#loading img")
+    spinner.style.display = "block"
+
+    setTimeout(() => {
+        spinner.style.display = "none"
+        result.appendChild(div)
+    }, 3000);
+
+    // console.log(info);
 }
