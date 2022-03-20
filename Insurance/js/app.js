@@ -1,46 +1,39 @@
-//variables
-const html = new HTMLUI()
-const form = document.querySelector("#request-quote")
-
+const html = new HTMLUI();
+const form = document.querySelector("#request-quote");
 
 //evenntListeners
-eventListeners()
+eventListeners();
 
 function eventListeners() {
+  document.addEventListener("DOMContentLoaded", function () {
+    html.displayYears();
+  });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        html.displayYears()
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    })
+    const make = document.querySelector("#make").value;
+    const year = document.getElementById("year").value;
+    const level = document.querySelector('input[name="level"]:checked').value;
+    // console.log(make);
+    // console.log(year);
+    // console.log(level);
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault()
-
-        const make = document.querySelector("#make").value
-        const year = document.getElementById("year").value
-        const level = document.querySelector('input[name="level"]:checked').value
-        // console.log(make);
-        // console.log(year);
-        // console.log(level);
-
-        if (make === "" || year === "" || level === "") {
-            html.displayError("لظفا مقادیر را به درستی وارد کنید")
-        } else {
-            let resultDiv = document.querySelector("#result div")
-            if (resultDiv !== null){
-                resultDiv.remove()
-            }
-            // console.log("alright");
-            const insurance = new Insurance(make, year, level)
-            // insurance(make, year, level) //it is a wrong one
-            const price = insurance.calculatePrice(insurance)
-            // console.log(price);
-            html.showResult(price, insurance)
-
-        }
-
-    })
-
+    if (make === "" || year === "" || level === "") {
+      html.displayError("لظفا مقادیر را به درستی وارد کنید");
+    } else {
+      let resultDiv = document.querySelector("#result div");
+      if (resultDiv !== null) {
+        resultDiv.remove();
+      }
+      // console.log("alright");
+      const insurance = new Insurance(make, year, level);
+      // insurance(make, year, level) //it is a wrong one
+      const price = insurance.calculatePrice(insurance);
+      // console.log(price);
+      html.showResult(price, insurance);
+    }
+  });
 }
 
 /*
