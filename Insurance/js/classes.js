@@ -89,6 +89,7 @@ class Insurance {
         return str;
       };
 
+    //get max year
     const now = new Date().toLocaleDateString("fa-IR");
     // console.log(now);
 
@@ -118,6 +119,7 @@ class Insurance {
 }
 
 class HTMLUI {
+  //display years
   displayYears() {
     let persianNumbers = [
         /۰/g,
@@ -164,6 +166,7 @@ class HTMLUI {
 
     let min = max - 20;
 
+    //access to the selected tag
     const selectYear = document.querySelector("#year");
 
     for (let i = max; i >= min; i--) {
@@ -171,15 +174,18 @@ class HTMLUI {
       option.innerText = i;
       option.value = i;
 
+      //append option to the selectYear
       selectYear.appendChild(option);
     }
   }
 
+  //display error on the form
   displayError(err) {
     const div = document.createElement("div");
     div.classList = "error";
     div.innerText = err;
 
+    //insert div in the form
     form.insertBefore(div, document.querySelector(".form-group"));
 
     setTimeout(() => {
@@ -189,8 +195,10 @@ class HTMLUI {
 
   showResult(price, info) {
     const result = document.querySelector("#result");
+    //create div for showing the price
     const div = document.createElement("div");
 
+    //convert make value to the car name
     let make = info.make;
     switch (make) {
       case "1":
