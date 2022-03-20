@@ -1,3 +1,4 @@
+//variables
 const html = new HTMLUI();
 const form = document.querySelector("#request-quote");
 
@@ -5,10 +6,13 @@ const form = document.querySelector("#request-quote");
 eventListeners();
 
 function eventListeners() {
+  //make option tag for select
   document.addEventListener("DOMContentLoaded", function () {
+    //display the <option>
     html.displayYears();
   });
 
+  //submit the form by clicking
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -19,6 +23,7 @@ function eventListeners() {
     // console.log(year);
     // console.log(level);
 
+    //ckeck the fields value
     if (make === "" || year === "" || level === "") {
       html.displayError("لظفا مقادیر را به درستی وارد کنید");
     } else {
@@ -44,10 +49,13 @@ function Insurance(make, year, level) {
     this.level = level
 }
 
+//calculating the price
 Insurance.prototype.calculatePrice = function (info) {
     // console.log(info);
     let price;
     let base = 2000000;
+    
+    //get the make value
     let make = info.make
     // insurance calculation by make
             
@@ -79,6 +87,8 @@ Insurance.prototype.calculatePrice = function (info) {
 
     const difference = this.getDifferenceYear(year)
     // console.log(difference);
+
+    //3% cheaper for each year
     // price = price - (((difference * 3) /100) * price)
     price = price - ((difference * 0.03) * price)
     // console.log(price);
@@ -130,6 +140,7 @@ Insurance.prototype.calculateLevel = function (level, price) {
 
 function HTMLUI() {}
 
+//1-display years 
 HTMLUI.prototype.displayYears = function () {
     let
         persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
@@ -153,36 +164,47 @@ HTMLUI.prototype.displayYears = function () {
 
     let min = max - 20
 
+    //access to the selected tag(year)
     const selectYear = document.querySelector("#year")
 
     for (let i = max; i >= min; i--) {
+        //create option    
         const option = document.createElement("option")
         option.innerText = i
         option.value = i
 
+        //append option to the selectYear
         selectYear.appendChild(option)
     }
 
 }
 
+//2.display error on the form
 HTMLUI.prototype.displayError = function (err) {
 
     const div = document.createElement("div")
     div.classList = "error"
     div.innerText = err
 
+    //insert div in form
     form.insertBefore(div, document.querySelector(".form-group"))
 
+    //remove error in 3 seconds
     setTimeout(() => {
         document.querySelector(".error").remove()
     }, 3000);
 }
 
+//3.display factor 
 HTMLUI.prototype.showResult = function (price, info) {
 
+    //access to the result div
     const result = document.querySelector("#result")
+
+    //create div for showing the price
     const div = document.createElement("div")
 
+    //convert the make value to car name
     let make = info.make
     switch (make) {
         case "1":
@@ -219,6 +241,7 @@ HTMLUI.prototype.showResult = function (price, info) {
     const spinner = document.querySelector("#loading img")
     spinner.style.display = "block"
 
+    //hide spinner in 3 sec and then show the result
     setTimeout(() => {
         spinner.style.display = "none"
         result.appendChild(div)
