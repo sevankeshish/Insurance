@@ -202,13 +202,13 @@ class HTMLUI {
     let make = info.make;
     switch (make) {
       case "1":
-        make = "پراید";
+        make = "optima";
         break;
       case "2":
-        make = "اپتیما";
+        make = "lexus";
         break;
       case "3":
-        make = "پورشه";
+        make = "porsche";
         break;
 
         // default:
@@ -218,17 +218,17 @@ class HTMLUI {
     let level = info.level;
 
     if (level === "basic") {
-      level = "ساده";
+      level = "basic";
     } else {
-      level = "کامل";
+      level = "full";
     }
 
     div.innerHTML = `
-        <p class="header">خلاصه فاکتور</p>
-        <p>مدل ماشین :${make}</p>
-        <p>سال ساخت :${info.year}</p>
-        <p>نوع بیمه :${level}</p>
-        <p class = "total" >فیمت نهایی :${price}</p>
+        <p class="header"> Invoice</p>
+        <p> car :${make}</p>
+        <p> year :${info.year}</p>
+        <p> insurance type :${level}</p>
+        <p class = "total" > price (Iran Toman) :${price}</p>
         `;
     //show spinner
     const spinner = document.querySelector("#loading img");
