@@ -25,7 +25,7 @@ function eventListeners() {
 
     //ckeck the fields value
     if (make === "" || year === "" || level === "") {
-      html.displayError("لظفا مقادیر را به درستی وارد کنید");
+      html.displayError("please complete all the required fields");
     } else {
       let resultDiv = document.querySelector("#result div");
       if (resultDiv !== null) {
